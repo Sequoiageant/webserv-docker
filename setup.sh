@@ -21,8 +21,8 @@ display_settings () {
 
 if [ $# -ge 1 ] && ([[ "$1" = '-b' ]] || [[ "$1" = '-build' ]]);
 then
-	docker-compose --env-file /home/user42/cursus42/webserver/.env \
-	--file /home/user42/cursus42/webserver/docker-compose.yml up \
+	docker-compose --env-file $PWD/.env \
+	--file $PWD/docker-compose.yml up \
 	--build -d
 	display_settings;
 elif [ $# -ge 1 ] && [[ "$1" = 'stop' ]];
@@ -33,8 +33,8 @@ then
 	docker-compose start
 	display_settings;
 else
-	docker-compose --env-file /home/user42/cursus42/webserver/.env \
-	--file /home/user42/cursus42/webserver/docker-compose.yml up -d
+	docker-compose --env-file $PWD/.env \
+	--file $PWD/docker-compose.yml up -d
 	display_settings;
 fi
 

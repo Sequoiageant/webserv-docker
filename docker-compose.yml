@@ -8,43 +8,20 @@ services:
       context: './php/'
       args:
        PHP_VERSION: ${PHP_VERSION}
-       UID: ${UID}
+       UID: $$UID
     networks:
       - backend
     volumes:
       - ${SRCS_PATH}:/var/www/html/
       # - ${SERVER_PATH}/logs/php/:/var/log/php/
-    # depends_on:
-    #   - mysql
 
-  # apache:
-  #   build:
-  #     context: './apache/'
-  #     args:
-  # Mysql Service
-  #      APACHE_VERSION: ${APACHE_VERSION}
-  #   depends_on:
-  #     - php
-  #     - mysql
-  #   networks:
-  #     - backend
-  #     - frontend
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   volumes:
-  #     - ${SRCS_PATH}:/var/www/html/
-  #     - ${SERVER_PATH}/logs/apache2/:/usr/local/log/apache2/
-  #     # - ${SERVER_PATH}/apache/vhosts/:/usr/local/apache2/conf/
-  #   # container_name: "${APACHE_NAME}"
-
-  # Nginx Service - used also as reverse proxy for pma / adminer
+  # Nginx Service
   nginx:
     build:
       context: './nginx/'
       args:
        NGINX_VERSION: ${NGINX_VERSION}
-       UID: ${UID}
+       UID: $$UID
     networks:
       - backend
     ports:
@@ -54,74 +31,8 @@ services:
       - ${SRCS_PATH}:/var/www/html:ro
       - ${SERVER_PATH}/nginx/conf.d:/etc/nginx/conf.d:ro
       - ${SERVER_PATH}/logs/nginx/:/var/log/nginx/
-      # - phpmyadmindata:/var/www/phpmyadmin:ro
-      # - adminerdata:/var/www/adminer:ro
     depends_on:
       - php
-      # - pma
-      # - adminer
-
-  
-#   # Mysql Service
-#   mysql:
-#     build:
-#       context: './mysql/'
-#       args:
-#        MYSQL_VERSION: ${MYSQL_VERSION}
-#        UID: ${UID}
-#     # restart: on-failure
-#     networks:
-#       - backend
-#     environment:
-#       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-#       # MYSQL_DATABASE: "${DB_NAME}"
-#       # MYSQL_USER: "${DB_USERNAME}"
-#       # MYSQL_PASSWORD: "${DB_PASSWORD}"
-#     volumes:
-#       - ${SERVER_PATH}/mysql_data/db_backup:/var/lib/backup/
-#       - ${SERVER_PATH}/mysql_data/8.0:/var/lib/mysql/
-#       - ${SERVER_PATH}/logs/mysql/:/var/log/mysql/
-#     # container_name: "${MYSQL_NAME}"
-
-#   # Phpmyadmin Service
-#   pma:
-#     image: phpmyadmin/phpmyadmin:${PMA_VERSION} #To pull image without dockerfile
-#     networks:
-#       - backend
-#     restart: on-failure
-#     environment:
-#       PMA_ABSOLUTE_URI: ${PMA_ABSOLUTE_URI}
-#       PMA_HOST: ${DB_HOST}
-#       PMA_USER: ${DB_USERNAME}
-#       PMA_PASSWORD: ${DB_PASSWORD}
-#     volumes:
-#       - phpmyadmindata:/var/www/html
-#     depends_on:
-#       - mysql
-#     # container_name: "${PMA_NAME}"
-
-#   # Adminer Service
-#   adminer:
-#     image: adminer:${ADMINER_VERSION}
-#     networks:
-#       - backend
-#     restart: on-failure
-#     environment:
-#       ADMINER_DEFAULT_DB_DRIVER: ${DB_HOST}
-#       ADMINER_DEFAULT_SERVER: ${DB_HOST}
-#       ADMINER_DEFAULT_DB_NAME: ${DB_NAME}
-#     volumes:
-#       - adminerdata:/var/www/html
-#     depends_on:
-#       - mysql
-#     # container_name: "${ADMINER_NAME}"
-
-
-#   # Volumes
-# volumes:
-#   phpmyadmindata:
-#   adminerdata:
-#   # mysqldata:
 
   # Networks
 networks:
