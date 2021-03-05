@@ -1,2 +1,0 @@
-2021/03/05 08:59:09 [error] 24#24: *1 directory index of "/var/www/html/" is forbidden, client: 172.18.0.1, server: php.local, request: "GET / HTTP/1.1", host: "php.local"
-2021/03/05 09:14:42 [emerg] 1#1: host not found in upstream "adminer" in /etc/nginx/conf.d/adminer.conf:18
