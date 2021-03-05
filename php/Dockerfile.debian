@@ -1,0 +1,62 @@
+ARG PHP_VERSION
+FROM php:${PHP_VERSION}
+
+MAINTAINER Julien Nolleau <j.nolleau42@gmail.com>
+
+# run non-interactive. 
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Locales
+RUN apt-get update && apt-get install -y locales
+
+RUN dpkg-reconfigure locales && locale-gen fr_FR.UTF-8 \
+    && /usr/sbin/update-locale fr_FR.UTF-8
+
+RUN echo 'fr_FR.UTF-8 UTF-8' >> /etc/locale.gen \
+    && locale-gen
+
+ENV LC_ALL fr_FR.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
+# update OS and install utils
+RUN apt-get update && apt-get install -y \
+        zlib1g-dev libicu-dev g++ \
+        libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
+#         vim \
+    && apt-get -yq autoremove;
+
+RUN mkdir /usr/local/log; \
+    mkdir /usr/local/log/php; \
+    chmod -R 755 /usr/local/log
+
+# install intl MySQLi gd
+RUN docker-php-ext-configure intl
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-configure exif
+RUN docker-php-ext-install -j$(nproc) mysqli intl gd exif
+
+RUN { \
+        echo 'short_open_tag = Off'; \
+        echo 'expose_php = Off'; \
+        echo 'error_reporting = E_ALL & ~E_STRICT'; \
+        echo 'display_errors = On'; \
+        echo 'error_log = /usr/local/log/php/php_errors.log'; \
+        echo 'upload_tmp_dir = /tmp/'; \
+        echo 'allow_url_fopen = on'; \
+        echo 'upload_max_filesize = 10M'; \
+        echo 'post_max_size = 12M'; \
+#         echo '[xdebug]'; \
+#         echo 'zend_extension="xdebug.so"'; \
+#         echo 'xdebug.remote_enable = 1'; \
+#         echo 'xdebug.remote_port = 9001'; \
+#         echo 'xdebug.remote_autostart = 1'; \
+#         echo 'xdebug.remote_connect_back = 0'; \
+#         echo 'xdebug.remote_host = host.docker.internal'; \
+#         echo 'xdebug.idekey = VSCODE'; \
+#         echo '[redis]'; \
+#         echo 'extension="igbinary.so"'; \
+#         echo 'extension="redis.so"'; \
+#         echo 'session.save_handler = "redis"'; \
+#         echo 'session.save_path = "tcp://redis-localhost:6379?weight=1&timeout=2.5"'; \
+    } > /usr/local/etc/php/conf.d/php-config.ini
