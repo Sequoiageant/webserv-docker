@@ -1,0 +1,6 @@
+
+# To test Authorization header
+GET / HTTP/1.1 
+host: static.local
+Upgrade-Insecure-Requests: 1
+Authorization: Basic anVsaWVuOnB3
