@@ -1,8 +1,11 @@
 ARG NGINX_VERSION
 FROM nginx:${NGINX_VERSION}
 
-ARG UID
-RUN apk --no-cache add shadow && usermod -u ${UID} nginx
+# ARG UID
+# RUN apk --no-cache add shadow && usermod -u ${UID} nginx
+RUN apk update && apk upgrade && \
+apk add --no-cache gettext && \
+apk add bash curl nmap ca-certificates logrotate tzdata
 
 COPY ./nginx.conf /etc/nginx/
 

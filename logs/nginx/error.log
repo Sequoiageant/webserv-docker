@@ -1,0 +1,11 @@
+2021/03/10 14:44:19 [emerg] 1#1: invalid number of arguments in "auth_basic" directive in /etc/nginx/conf.d/static.conf:11
+2021/03/10 14:44:24 [emerg] 1#1: invalid number of arguments in "auth_basic" directive in /etc/nginx/conf.d/static.conf:11
+2021/03/10 14:45:30 [emerg] 1#1: invalid number of arguments in "auth_basic" directive in /etc/nginx/conf.d/static.conf:11
+2021/03/10 15:21:19 [emerg] 1#1: invalid number of arguments in "auth_basic" directive in /etc/nginx/conf.d/static.conf:9
+2021/03/10 15:21:23 [emerg] 1#1: invalid number of arguments in "auth_basic" directive in /etc/nginx/conf.d/static.conf:9
+2021/03/10 15:30:42 [emerg] 1#1: invalid number of arguments in "auth_basic" directive in /etc/nginx/conf.d/static.conf:9
+2021/03/10 15:33:34 [emerg] 1#1: invalid number of arguments in "auth_basic" directive in /etc/nginx/conf.d/static.conf:11
+2021/03/10 15:33:47 [emerg] 1#1: invalid number of arguments in "auth_basic" directive in /etc/nginx/conf.d/static.conf:11
+2021/03/10 15:36:25 [emerg] 1#1: invalid number of arguments in "auth_basic" directive in /etc/nginx/conf.d/static.conf:11
+2021/03/10 15:44:35 [emerg] 1#1: invalid number of arguments in "auth_basic" directive in /etc/nginx/conf.d/static.conf:11
+2021/03/10 16:03:57 [error] 30#30: *7 user "julien": password mismatch, client: 172.20.0.1, server: static.local, request: "GET / HTTP/1.1 ", host: "static.local"
