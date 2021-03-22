@@ -1,10 +1,8 @@
 <?php 
 	if (!empty($_POST))
 	{
-		if (isset($_POST['nbr']) && $_POST['nbr'] == '42')
-			$answer = 'YOU POST THE RIGHT NUMBER !';
-		else
-			$answer = 'YOU LOOSE';
+		if (isset($_POST['nbr']))
+			$answer = $_POST['nbr'];
 	}
 	else if (!empty($_GET))
 	{
