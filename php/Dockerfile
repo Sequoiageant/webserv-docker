@@ -4,8 +4,8 @@ FROM php:${PHP_VERSION}
 # update
 RUN apk update
 
-ARG UID
-RUN apk --no-cache add shadow && usermod -u ${UID} www-data
+# ARG UID
+# RUN apk --no-cache add shadow && usermod -u ${UID} www-data
 
 # # Locales
 # ENV MUSL_LOCALE_DEPS cmake make musl-dev gcc gettext-dev libintl 

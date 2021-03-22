@@ -8,7 +8,7 @@ services:
       context: './php/'
       args:
        PHP_VERSION: ${PHP_VERSION}
-       UID: $$UID
+       # UID: $UID
     networks:
       - backend
     volumes:
@@ -21,15 +21,16 @@ services:
       context: './nginx/'
       args:
        NGINX_VERSION: ${NGINX_VERSION}
-       UID: $$UID
+       # UID: $UID
     networks:
       - backend
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ${SRCS_PATH}:/var/www/html:ro
-      - ${SERVER_PATH}/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ${SRCS_PATH}:/var/www/html
+      - ${SERVER_PATH}/nginx/conf.d:/etc/nginx/conf.d
+      - ${SERVER_PATH}/nginx/auth:/etc/nginx/auth
       - ${SERVER_PATH}/logs/nginx/:/var/log/nginx/
     depends_on:
       - php

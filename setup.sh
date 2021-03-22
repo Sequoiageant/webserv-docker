@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Checking if docker is running, starting it if not
-pgrep docker &> /dev/null
-if [ $? != 0 ]
-then
-	echo "Docker service stoped. Starting it..."
-	sudo service docker start
-fi
+# pgrep docker &> /dev/null
+# if [ $? != 0 ]
+# then
+# 	echo "Docker service stoped. Starting it..."
+# 	sudo service docker start
+# fi
 
 display_settings () {
 	echo "======================================"
