@@ -3,6 +3,8 @@
 	{
 		if (isset($_POST['nbr']))
 			$answer = $_POST['nbr'];
+		else
+			$answer = "ANSWER is empty";
 	}
 	else if (!empty($_GET))
 	{

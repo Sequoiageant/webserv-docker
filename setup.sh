@@ -12,10 +12,9 @@ display_settings () {
 	echo "======================================"
 	echo "========== Server Settings =========="
 	echo "======================================"
-	echo "Static site: http://default.local/"
+	echo "Default site: http://localhost:80"
+	echo "Static site: http://static.local/"
 	echo "Dynamic site: http://php.local/"
-	# echo "Static site: http://static.local/"
-	# echo "Dynamic site: http://dynamic.local/"
 }
 
 
@@ -32,6 +31,9 @@ elif [ $# -ge 1 ] && [[ "$1" = 'start' ]];
 then
 	docker-compose start
 	display_settings;
+elif [ $# -ge 1 ] && ([[ "$1" = 'restart' ]] || [[ "$1" = 'rs' ]]);
+then
+	docker-compose restart
 else
 	docker-compose --env-file $PWD/.env \
 	--file $PWD/docker-compose.yml up -d
